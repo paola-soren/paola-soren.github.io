@@ -5,7 +5,6 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   base: "/paola-soren/",
-  plugins: [vue()],
   css: {
     preprocessorOptions: {
       scss: {
