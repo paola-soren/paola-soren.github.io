@@ -160,7 +160,7 @@ const getEmblemContent = (role) => {
               <p>{{ currentWork.firstLines }}</p>
             </div>
           </div>
-          <div v-if=currentWork.citation class="extract-section animate-in" style="--delay: 0.6s">
+          <div v-if=currentWork.extract class="extract-section animate-in" style="--delay: 0.6s">
             <h2>Citation</h2>
             <div class="extract-content">
               <p>{{ currentWork.extract }}</p>
