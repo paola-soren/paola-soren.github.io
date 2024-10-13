@@ -1,0 +1,56 @@
+@import 'variables';
+@import 'mixins';
+@import 'typography';
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap');
+
+:root {
+  --navbar-height: 48px;
+  --navbar-height-mobile: 48px;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  @include body-text;
+  background-color: $background-color;
+  color: $text-color;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0;
+}
+
+.section {
+  @include section-full;
+  display: flex;
+}
+
+.back-button {
+  position: fixed;
+  top: calc(2rem + 48px);
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba($text-bg-color, 0.9);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: $text-color;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 5px 15px rgba($primary-color, 0.1);
+  z-index: 100;
+
+  &:hover {
+    transform: translateX(-5px);
+  }
+}
+
