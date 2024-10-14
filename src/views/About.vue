@@ -314,4 +314,48 @@ const navigateToWork = () => {
     }
   }
 }
+
+@media (max-width: 600px) {
+  .about-me, .about-work {
+    flex-direction: column;
+    padding: 1.5rem;
+    
+    .floating-image {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .content-wrapper {
+      width: 100%;
+      padding: 0;
+      text-align: center;
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .preview-text {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .about-work {
+    .content-wrapper {
+      flex-direction: column;
+      align-items: center;
+
+      h2 {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  .about-work {
+    .floating-image {
+      display: none;
+    }
+  }
+}
 </style>
