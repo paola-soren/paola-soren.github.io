@@ -1,0 +1,9 @@
+@mixin heading-style {
+    font-family: 'Playfair Display', serif;
+    color: $primary-color;
+  }
+  
+  @mixin body-text {
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.8;
+  }

@@ -1,0 +1,43 @@
+@mixin section-full {
+  height: $section-height;
+  width: $section-width;
+  position: relative;
+  overflow: hidden;
+}
+
+@mixin content-wrapper {
+  background-color: rgba($text-bg-color, 0.9);
+  padding: 3rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba($primary-color, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+
+  &:hover {
+    box-shadow: 0 15px 40px rgba($primary-color, 0.25);
+    transform: translateY(-5px);
+  }
+}
+
+@mixin decorative-frame {
+  &::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border: 2px solid $frame-color;
+    border-radius: 10px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+
+  &:hover::before {
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-color: rgba($primary-color, 0.4);
+  }
+}
