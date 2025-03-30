@@ -14,7 +14,7 @@ const works = {
     summary: "Dans une société où humains et vampires tentent vainement de vivre ensemble, ce n’est pas l’existence des créatures nocturnes qui pose problème à Dennis, un mortel qui partage son quotidien avec un de ces êtres surnaturels. Ce qui ennuie le jeune homme, ce sont les étranges migraines dont il souffre et qui attirent trop d’attention sur lui, menaçant le secret qu’il garde.\nAprès un séjour forcé à l’hôpital, Dennis se voit contraint de révéler la vérité à Thomas, son compagnon : il est le fils d’un scientifique influent, qui se livre à des expérimentations à l'éthique douteuse auxquelles il a servi de cobaye.\nSe confier à Thomas est une chose mais quand Andrea, un vampire important dans le paysage politique, met à son tour le doigt sur son secret, Dennis entre dans une panique folle à l’idée de dire au revoir à son quotidien anonyme.",
     firstLines: "Cette nuit-là, moi qui n’avais pas versé la moindre larme depuis au moins mille ans, j’ai pleuré.\nPour vous, le 25 décembre 2105 a marqué la révélation de notre existence dans la violence et le sang. Mais pour moi, cette date a signé la véritable mort d’Horaha, âgé de quatre millénaires. Peut-être un peu plus, peut-être un peu moins ; à quoi bon compter ? Je pensais qu’il était éternel.",
     extract: "Les humains étaient pénibles parce que la peur guidait leurs actes. Les vampires étaient agaçants parce que leur sentiment de supériorité les incitait à agir comme des enfants pourris gâtés. Et, à lui, incombait la responsabilité de mettre de l’ordre dans ce merdier pour nourrir l’espoir d’une harmonie.",
-    wordCount: "624 975 sec (103 411 mots)",
+    wordCount: "599 661 sec (99 559 mots)",
     status: "Terminé",
     mainCharacters: [
       {

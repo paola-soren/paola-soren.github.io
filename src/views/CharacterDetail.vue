@@ -15,7 +15,7 @@ const characters = {
     age: 25,
     birthday: "07/08/2102",
     occupation: "Réceptionniste",
-    nationality: "France",
+    nationality: "Français",
     physicalDesc: {
       height: "1m59",
       build: "Très pâle et très mince/maigre",
@@ -64,13 +64,13 @@ const characters = {
     age: 3000,
     birthday: "Aux alentours du début du 9e siècle ACN",
     occupation: "Chef de la diplomatie interraciale",
-    nationality: "Phénicie",
+    nationality: "Phénicien",
     physicalDesc: {
       height: "1m92",
       build: "Élancé mais musclé à cause du travail manuel",
       hair: "Noir",
       eyes: "Vert foncé",
-      distinguishingFeatures: "Apparence adolescente...\n...à la quelle il ne porte aucune importance"
+      distinguishingFeatures: "Apparence adolescente...\n...et allure négligée"
     },
     personality: {
       traits: [
@@ -108,7 +108,7 @@ const characters = {
     age: 30,
     birthday: "02/04/2097",
     occupation: "Barmaid",
-    nationality: "Mexique",
+    nationality: "Franco-mexicaine",
     physicalDesc: {
       height: "1m73",
       build: "Corpulence moyenne, habituée à porter des charges lourdes",
@@ -162,7 +162,7 @@ const characters = {
     age: 30,
     birthday: "18/03/1817",
     occupation: "Architecte et conférencier",
-    nationality: "Royaume-Uni",
+    nationality: "Anglais",
     physicalDesc: {
       height: "1m80",
       build: "Fine et élégante",
