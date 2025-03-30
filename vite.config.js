@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
-  base: "/paola-soren.github.io/",
+  base: "/",
   css: {
     preprocessorOptions: {
       scss: {
