@@ -525,5 +525,51 @@ const getRelationSymbol = (type) => {
   .two-column-layout {
     grid-template-columns: 1fr;
   }
+
+  .quotes-list {
+    .quote-item {
+      border-top: 3px solid $primary-color;
+      border-left: none;
+    }
+  }
+
+  .info-item, .desc-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+    .label {
+      margin-bottom: 0.5rem;
+    }
+    
+    .value {
+      max-width: 100%;
+      text-align: center;
+    }
+  }
+  
+  .relationships-list {
+    .relationship-item {
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 1rem;
+      margin-bottom: 0.8rem; 
+      
+      .relation-name {
+        margin-right: 0;
+        margin-bottom: 0.3rem;
+      }
+      
+      .relation-symbol {
+        margin-right: 0;
+        margin-bottom: 0.3rem;
+        line-height: 1;
+      }
+      
+      .relation-type {
+        text-align: center;
+      }
+    }
+  }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <nav class="footer">
     <div class="footer-content">
-      <p>© Paola Soren, 2024</p>
+      <p>© Paola Soren, 2025</p>
       <p>Les images utilisées proviennent de sources libres de droit ou de Canva Premium</p>
     </div>
   </nav>

@@ -130,37 +130,41 @@ const getEmblemContent = (role) => {
     <div class="book-wrapper" v-if="currentWork">
       <div class="book-pages">
         <div class="book-page left-page">
-          <h1 class="book-title animate-in">{{ currentWork.title }}</h1>
+          <div class="book-title-card">
+            <h1 class="book-title animate-in">{{ currentWork.title }}</h1>
 
-          <div class="basic-info animate-in" style="--delay: 0.2s">
-            <div class="info-row">
-              <span class="label">Genre</span>
-              <span class="value">{{ currentWork.genre }}</span>
-            </div>
-            <div class="info-row">
-              <span class="label">Statut</span>
-              <span class="value">{{ currentWork.status }}</span>
-            </div>
-            <div class="info-row">
-              <span class="label">Longueur</span>
-              <span class="value">{{ currentWork.wordCount }}</span>
+            <div class="basic-info animate-in" style="--delay: 0.2s">
+              <div class="info-row">
+                <span class="label">Genre</span>
+                <span class="value">{{ currentWork.genre }}</span>
+              </div>
+              <div class="info-row">
+                <span class="label">Statut</span>
+                <span class="value">{{ currentWork.status }}</span>
+              </div>
+              <div class="info-row">
+                <span class="label">Longueur</span>
+                <span class="value">{{ currentWork.wordCount }}</span>
+              </div>
             </div>
           </div>
-
-          <div class="summary-section animate-in" style="--delay: 0.4s">
+          
+        
+          <div class="summary-section animate-in mobile-card" style="--delay: 0.4s">
             <h2>Résumé</h2>
             <p>{{ currentWork.summary }}</p>
           </div>
         </div>
 
         <div class="book-page right-page">
-          <div class="first-lines-section animate-in" style="--delay: 0.6s">
+          <div class="first-lines-section animate-in mobile-card" style="--delay: 0.6s">
             <h2>Les premières lignes</h2>
             <div class="first-lines-content">
               <p>{{ currentWork.firstLines }}</p>
             </div>
           </div>
-          <div v-if=currentWork.extract class="extract-section animate-in" style="--delay: 0.6s">
+          
+          <div v-if="currentWork.extract" class="extract-section animate-in mobile-card" style="--delay: 0.6s">
             <h2>Citation</h2>
             <div class="extract-content">
               <p>{{ currentWork.extract }}</p>
@@ -169,26 +173,28 @@ const getEmblemContent = (role) => {
         </div>
       </div>
 
-      <section v-if=currentWork.mainCharacters class="characters-section">
-        <h2 class="section-title animate-in" style="--delay: 0.8s">Personnages principaux</h2>
-        <div class="characters-grid">
-          <div v-for="(character) in currentWork.mainCharacters" :key="character.id" class="character-card"
-            v-intersection-animate>
-            <div class="card-frame">
-              <div class="character-emblem" :class="character.role.toLowerCase()"
-                v-html="getEmblemContent(character.role)"></div>
-              <div class="character-info">
-                <h3>{{ character.name }}</h3>
-                <span class="character-role">{{ character.role }}</span>
-              </div>
-            </div>
-            <p class="character-desc">{{ character.shortDesc }}</p>
-            <div class="card-footer" @click="navigateToCharacter(character)">
-              <span class="view-profile">En savoir plus</span>
-            </div>
-          </div>
+      <section v-if="currentWork.mainCharacters" class="characters-section">
+    <h2 class="section-title animate-in" style="--delay: 0.8s">Personnages principaux</h2>
+    <div class="characters-grid">
+      <div v-for="(character) in currentWork.mainCharacters" 
+           :key="character.id" 
+           class="character-card"
+           v-intersection-animate>
+        <div class="character-header">
+          <h3 class="character-name">{{ character.name }}</h3>
+          <span class="character-role">{{ character.role }}</span>
         </div>
-      </section>
+        <div class="character-desc">{{ character.shortDesc }}</div>
+        <button 
+          class="character-cta" 
+          @click="navigateToCharacter(character)"
+          :class="{ 'disabled': !character.online }">
+          <span>Fiche personnage</span>
+          <span class="arrow">→</span>
+        </button>
+      </div>
+    </div>
+  </section>
     </div>
   </article>
 </template>
@@ -199,12 +205,35 @@ const getEmblemContent = (role) => {
   padding: 2rem;
   background-color: $background-color;
   overflow-x: hidden;
+
+  @media (max-width: 768px) {
+    padding: 1rem; 
+  }
+}
+
+.back-button {
+  font-size: 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: $primary-color;
+  margin-bottom: 2rem;
+  
+  &:hover {
+    transform: translateX(-3px);
+  }
 }
 
 .book-wrapper {
   max-width: 1200px;
-  margin: 4rem auto;
+  margin: 2rem auto;
   padding-top: 2rem;
+  
+  @media (max-width: 768px) {
+    margin: 1rem auto;
+    padding-top: 0;
+    width: 100%;
+  }
 }
 
 .book-pages {
@@ -227,11 +256,28 @@ const getEmblemContent = (role) => {
     background: rgba($primary-color, 0.1);
     transform: translateX(-50%);
   }
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1.5rem;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    
+    &::before {
+      display: none;
+    }
+  }
 }
 
 .book-page {
   flex: 1;
   padding: 1rem;
+  
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 }
 
 .book-title {
@@ -239,6 +285,56 @@ const getEmblemContent = (role) => {
   color: $primary-color;
   margin-bottom: 2rem;
   font-family: 'Playfair Display', serif;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.extract-content,
+.first-lines-content {
+  font-style: italic;
+  padding: 1rem;
+  background: rgba($primary-color, 0.05);
+  border-left: 3px solid $primary-color;
+  border-radius: 5px;
+  
+  @media (max-width: 768px) {
+    border-left: none;
+    border-top: 3px solid $primary-color;
+  }
+}
+
+@media (max-width: 768px) {
+  .book-title-card {
+    background: rgba($text-bg-color, 0.98);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 30px rgba($primary-color, 0.15);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .mobile-card {
+    background: rgba($text-bg-color, 0.98);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 30px rgba($primary-color, 0.15);
+    width: 100%;
+    max-width: 100%; 
+    box-sizing: border-box; 
+    
+    h2 {
+      margin-top: 0;
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+  }
 }
 
 .basic-info {
@@ -247,11 +343,24 @@ const getEmblemContent = (role) => {
   .info-row {
     display: flex;
     margin-bottom: 0.5rem;
+    align-items: center;
 
     .label {
-      width: 100px;
+      min-width: 100px;
       color: $accent-color;
       font-weight: 500;
+    }
+    
+    .value {
+      flex: 1;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    
+    .info-row {
+      padding: 0.25rem 0;
     }
   }
 }
@@ -272,15 +381,6 @@ const getEmblemContent = (role) => {
   }
 }
 
-.extract-content,
-.first-lines-content {
-  font-style: italic;
-  padding: 1rem;
-  background: rgba($primary-color, 0.05);
-  border-left: 3px solid $primary-color;
-  border-radius: 5px;
-}
-
 .summary-section p,
 .extract-content p,
 .first-lines-content p {
@@ -288,36 +388,52 @@ const getEmblemContent = (role) => {
 }
 
 .characters-section {
-  margin-top: 4rem;
+  margin-top: 2rem;
+  
+  @media (max-width: 768px) {
+    margin-top: 0;
+  }
 
   .section-title {
     text-align: center;
     font-size: 2rem;
     color: $primary-color;
     margin-bottom: 2rem;
+    
+    @media (max-width: 768px) {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
   }
 }
 
 .characters-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
 }
 
 .character-card {
   background: $text-bg-color;
-  border-radius: 15px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba($primary-color, 0.15);
+  box-shadow: 0 6px 20px rgba($primary-color, 0.1);
   transition: all 0.3s ease;
-  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.3s ease;
+  height: 100%;
+  border: 1px solid rgba($primary-color, 0.1);
 
   &.is-visible {
     opacity: 1;
@@ -325,137 +441,81 @@ const getEmblemContent = (role) => {
   }
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba($primary-color, 0.25);
-
-    .card-frame::before {
-      opacity: 1;
-    }
-
-    .character-emblem {
-      transform: scale(1.1);
-    }
-
-    .view-profile {
-      color: $primary-color;
-      font-size: 1.1rem;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba($primary-color, 0.2);
+    
+    .character-cta {
+      background: rgba($primary-color, 0.1);
+      
+      .arrow {
+        transform: translateX(5px);
+      }
     }
   }
+}
 
-  .card-frame {
-    background: linear-gradient(45deg, $primary-color, $secondary-color);
-    padding: 1.5rem;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background:
-        radial-gradient(circle at top left, transparent 30%, rgba(0, 0, 0, 0.2) 90%),
-        radial-gradient(circle at bottom right, transparent 30%, rgba(0, 0, 0, 0.2) 90%);
-      opacity: 0.5;
-      transition: opacity 0.3s ease;
-    }
+.character-header {
+  padding: 1.2rem 1.2rem 0.8rem;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1.2rem;
+    right: 1.2rem;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba($primary-color, 0.3), transparent);
   }
+}
 
-  .character-emblem {
-    width: 60px;
-    height: 60px;
-    background: $text-bg-color;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: $primary-color;
+.character-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: $primary-color;
+  margin: 0 0 0.5rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.character-role {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  background: rgba($primary-color, 0.08);
+  border-radius: 12px;
+  color: $secondary-color;
+}
+
+.character-desc {
+  padding: 1.2rem;
+  line-height: 1.5;
+  color: $text-color;
+  font-size: 0.95rem;
+  flex-grow: 1;
+  position: relative;
+}
+
+.character-cta {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.2rem;
+  background: rgba($primary-color, 0.05);
+  border: none;
+  color: $primary-color;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.3s ease;
+  
+  &.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .arrow {
     transition: transform 0.3s ease;
-    position: relative;
-    z-index: 1;
-    margin-right: 1rem;
-
-    &::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 2px solid $primary-color;
-      top: -3px;
-      left: -3px;
-      opacity: 0.5;
-    }
-  }
-
-  .character-info {
-    color: $text-bg-color;
-    position: relative;
-    z-index: 1;
-    flex-grow: 1;
-
-    h3 {
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    }
-
-    .character-role {
-      display: inline-block;
-      padding: 0.25rem 0.75rem;
-      background: rgba($text-bg-color, 0.2);
-      border-radius: 15px;
-      font-size: 0.875rem;
-      backdrop-filter: blur(5px);
-    }
-  }
-
-  .character-desc {
-    flex-grow: 1;
-    padding: 1.5rem;
-    line-height: 1.6;
-    color: $text-color;
-    font-style: italic;
-    position: relative;
-
-    &::before,
-    &::after {
-      content: '✧';
-      position: absolute;
-      font-size: 1.5rem;
-      color: rgba($primary-color, 0.3);
-      line-height: 1;
-    }
-
-    &::before {
-      top: 0.5rem;
-      left: 0.5rem;
-    }
-
-    &::after {
-      bottom: 0.5rem;
-      right: 0.5rem;
-      transform: rotate(180deg);
-    }
-  }
-
-  .card-footer {
-    padding: 1rem;
-    text-align: center;
-    background: rgba($primary-color, 0.05);
-    border-top: 1px solid rgba($primary-color, 0.1);
-    cursor: pointer;
-
-    .view-profile {
-      font-weight: bold;
-      color: $secondary-color;
-      transition: color 0.3s ease;
-    }
   }
 }
 
@@ -464,6 +524,11 @@ const getEmblemContent = (role) => {
   transform: translateX(-20px);
   animation: slideIn 0.6s ease-out forwards;
   animation-delay: var(--delay, 0s);
+  
+  @media (max-width: 768px) {
+    transform: translateY(-20px);
+    animation-name: fadeIn;
+  }
 }
 
 @keyframes slideIn {
@@ -478,53 +543,15 @@ const getEmblemContent = (role) => {
   }
 }
 
-@keyframes slideUpFade {
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
 
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@media (max-width: 768px) {
-  .book-pages {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1.5rem;
-
-    &::before {
-      width: 100%;
-      height: 4px;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-    }
-  }
-
-  .book-page {
-    flex: 1;
-    padding: 1rem;
-    overflow: hidden;
-    height: auto;
-    min-height: 0;
-  }
-
-  .left-page {
-    margin-bottom: 2.5rem;
-  }
-
-  .back-button {
-    position: static;
-    margin-bottom: 2rem;
-  }
-
-  .characters-grid {
-    grid-template-columns: 1fr;
-    padding: 1rem;
   }
 }
 </style>
