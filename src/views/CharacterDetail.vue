@@ -7,6 +7,19 @@ const popup = ref(null)
 const router = useRouter()
 const route = useRoute()
 
+const expandedSections = ref({
+  basicInfo: false,
+  physicalDesc: false,
+  personality: false,
+  background: false,
+  relationships: false,
+  quotes: false
+})
+
+const toggleSection = (section) => {
+  expandedSections.value[section] = !expandedSections.value[section]
+}
+
 const characters = {
   'dennis': {
     name: "Dennis",
@@ -255,104 +268,134 @@ const getRelationSymbol = (type) => {
       </header>
       
       <div class="character-content">
-        <section class="content-section basic-info">
-          <h2>Fiche d'identité</h2>
-          <div class="info-grid">
-            <div class="info-item">
-              <span class="label">Race</span>
-              <span class="value">{{ currentCharacter.title }}</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Genre</span>
-              <span class="value">{{ currentCharacter.gender }}</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Age</span>
-              <span class="value">{{ currentCharacter.age }}</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Date de naissance</span>
-              <span class="value">{{ currentCharacter.birthday }}</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Emploi</span>
-              <span class="value">{{ currentCharacter.occupation }}</span>
-            </div>
-            <div class="info-item">
-              <span class="label">Nationalité</span>
-              <span class="value">{{ currentCharacter.nationality }}</span>
+        <section class="content-section basic-info mobile-section">
+          <h2 @click="toggleSection('basicInfo')" class="section-header">
+            Fiche d'identité
+            <span class="toggle-icon">{{ expandedSections.basicInfo ? '▼' : '▶' }}</span>
+          </h2>
+          <div class="section-content" :class="{ 'expanded': expandedSections.basicInfo }">
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="label">Race</span>
+                <span class="value">{{ currentCharacter.title }}</span>
+              </div>
+              <div class="info-item">
+                <span class="label">Genre</span>
+                <span class="value">{{ currentCharacter.gender }}</span>
+              </div>
+              <div class="info-item">
+                <span class="label">Age</span>
+                <span class="value">{{ currentCharacter.age }}</span>
+              </div>
+              <div class="info-item">
+                <span class="label">Date de naissance</span>
+                <span class="value">{{ currentCharacter.birthday }}</span>
+              </div>
+              <div class="info-item">
+                <span class="label">Emploi</span>
+                <span class="value">{{ currentCharacter.occupation }}</span>
+              </div>
+              <div class="info-item">
+                <span class="label">Nationalité</span>
+                <span class="value">{{ currentCharacter.nationality }}</span>
+              </div>
             </div>
           </div>
         </section>
 
         <div class="two-column-layout">
-          <section class="content-section physical-desc">
-            <h2>Physique</h2>
-            <div class="description-list">
-              <div v-for="(value, key) in currentCharacter.physicalDesc" :key="key" class="desc-item">
-                <span class="label">{{ translations[key] || key }}</span>
-                <span class="value">{{ value }}</span>
+          <section class="content-section physical-desc mobile-section">
+            <h2 @click="toggleSection('physicalDesc')" class="section-header">
+              Physique
+              <span class="toggle-icon">{{ expandedSections.physicalDesc ? '▼' : '▶' }}</span>
+            </h2>
+            <div class="section-content" :class="{ 'expanded': expandedSections.physicalDesc }">
+              <div class="description-list">
+                <div v-for="(value, key) in currentCharacter.physicalDesc" :key="key" class="desc-item">
+                  <span class="label">{{ translations[key] || key }}</span>
+                  <span class="value">{{ value }}</span>
+                </div>
               </div>
             </div>
           </section>
 
-          <section class="content-section personality">
-            <h2>Caractère</h2>
-            <div class="personality-content">
-              <div class="traits-list">
-                <h3>Traits de personnalité</h3>
-                <ul>
-                  <li v-for="trait in currentCharacter.personality.traits" :key="trait">
-                    {{ trait }}
-                  </li>
-                </ul>
-              </div>
-              <div class="personality-details">
-                <div class="detail-item">
-                  <h3>Particularités</h3>
-                  <p>{{ currentCharacter.personality.quirks }}</p>
+          <section class="content-section personality mobile-section">
+            <h2 @click="toggleSection('personality')" class="section-header">
+              Caractère
+              <span class="toggle-icon">{{ expandedSections.personality ? '▼' : '▶' }}</span>
+            </h2>
+            <div class="section-content" :class="{ 'expanded': expandedSections.personality }">
+              <div class="personality-content">
+                <div class="traits-list">
+                  <h3>Traits de personnalité</h3>
+                  <ul>
+                    <li v-for="trait in currentCharacter.personality.traits" :key="trait">
+                      {{ trait }}
+                    </li>
+                  </ul>
                 </div>
-                <div class="detail-item">
-                  <h3>Redoute</h3>
-                  <p>{{ currentCharacter.personality.fears }}</p>
-                </div>
-                <div class="detail-item">
-                  <h3>Objectif</h3>
-                  <p>{{ currentCharacter.personality.dreams }}</p>
+                <div class="personality-details">
+                  <div class="detail-item">
+                    <h3>Particularités</h3>
+                    <p>{{ currentCharacter.personality.quirks }}</p>
+                  </div>
+                  <div class="detail-item">
+                    <h3>Redoute</h3>
+                    <p>{{ currentCharacter.personality.fears }}</p>
+                  </div>
+                  <div class="detail-item">
+                    <h3>Objectif</h3>
+                    <p>{{ currentCharacter.personality.dreams }}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </section>
         </div>
 
-        <section class="content-section background">
-          <h2>En quelques mots...</h2>
-          <div class="background-content">
-            <p>{{ currentCharacter.background }}</p>
+        <section class="content-section background mobile-section">
+          <h2 @click="toggleSection('background')" class="section-header">
+            En quelques mots...
+            <span class="toggle-icon">{{ expandedSections.background ? '▼' : '▶' }}</span>
+          </h2>
+          <div class="section-content" :class="{ 'expanded': expandedSections.background }">
+            <div class="background-content">
+              <p>{{ currentCharacter.background }}</p>
+            </div>
           </div>
         </section>
 
         <div class="two-column-layout">
-          <section class="content-section relationships">
-            <h2>Liens</h2>
-            <div class="relationships-list">
-              <div v-for="relation in currentCharacter.relationships" 
-                  :key="relation.name" 
-                  class="relationship-item"
-                  :class="`relation-type-${relation.type.toLowerCase()}`"
-                  @click="navigateToCharacter(relation)">
-                <span class="relation-name">{{ relation.name }}</span>
-                <span class="relation-symbol">{{ getRelationSymbol(relation.type) }}</span>
-                <span class="relation-type">{{ relation.description }}</span>
+          <section class="content-section relationships mobile-section">
+            <h2 @click="toggleSection('relationships')" class="section-header">
+              Liens
+              <span class="toggle-icon">{{ expandedSections.relationships ? '▼' : '▶' }}</span>
+            </h2>
+            <div class="section-content" :class="{ 'expanded': expandedSections.relationships }">
+              <div class="relationships-list">
+                <div v-for="relation in currentCharacter.relationships" 
+                    :key="relation.name" 
+                    class="relationship-item"
+                    :class="`relation-type-${relation.type.toLowerCase()}`"
+                    @click="navigateToCharacter(relation)">
+                  <span class="relation-name">{{ relation.name }}</span>
+                  <span class="relation-symbol">{{ getRelationSymbol(relation.type) }}</span>
+                  <span class="relation-type">{{ relation.description }}</span>
+                </div>
               </div>
             </div>
           </section>
 
-          <section class="content-section quotes">
-            <h2>Citation</h2>
-            <div class="quotes-list">
-              <div v-for="(quote, index) in currentCharacter.quotes" :key="index" class="quote-item">
-                "{{ quote }}"
+          <section class="content-section quotes mobile-section">
+            <h2 @click="toggleSection('quotes')" class="section-header">
+              Citation
+              <span class="toggle-icon">{{ expandedSections.quotes ? '▼' : '▶' }}</span>
+            </h2>
+            <div class="section-content" :class="{ 'expanded': expandedSections.quotes }">
+              <div class="quotes-list">
+                <div v-for="(quote, index) in currentCharacter.quotes" :key="index" class="quote-item">
+                  "{{ quote }}"
+                </div>
               </div>
             </div>
           </section>
@@ -440,7 +483,6 @@ const getRelationSymbol = (type) => {
     color: $primary-color;
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    text-transform: uppercase;
     letter-spacing: 1px;
     text-align: center;
   }
@@ -521,9 +563,67 @@ const getRelationSymbol = (type) => {
   }
 }
 
+@media (min-width: 769px) {
+  .section-content {
+    display: block !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+  }
+  
+  .toggle-icon {
+    display: none;
+  }
+  
+  .section-header {
+    cursor: default !important;
+    font-family: 'Playfair Display', serif;
+  }
+}
+
 @media (max-width: 768px) {
+  .character-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
   .two-column-layout {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .mobile-section {
+    margin-bottom: 1rem;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    font-family: 'Playfair Display', serif;
+    margin: 0 !important;
+    text-align: left !important;
+    
+    .toggle-icon {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $primary-color;
+    }
+  }
+  
+  .section-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out, opacity 0.3s ease-out;
+  opacity: 0;
+  
+    &.expanded {
+      max-height: 2000px;
+      opacity: 1;
+    }
   }
 
   .quotes-list {
