@@ -7,6 +7,10 @@ const popup = ref(null)
 const router = useRouter()
 const route = useRoute()
 
+const isSummaryOpen = ref(false)
+const isFirstLinesOpen = ref(false)
+const isExtractOpen = ref(false)
+
 const works = {
   work1: {
     title: "Sang Souvenir",
@@ -88,6 +92,17 @@ const navigateToCharacter = (character) => {
   router.push(`/personnages/${character.id}`)
 }
 
+const toggleSummary = () => {
+  isSummaryOpen.value = !isSummaryOpen.value
+}
+
+const toggleFirstLines = () => {
+  isFirstLinesOpen.value = !isFirstLinesOpen.value
+}
+
+const toggleExtract = () => {
+  isExtractOpen.value = !isExtractOpen.value
+}
 
 const vIntersectionAnimate = {
   mounted: (el) => {
@@ -107,16 +122,6 @@ const vIntersectionAnimate = {
 
     observer.observe(el)
   }
-}
-
-
-const getEmblemContent = (role) => {
-  const emblems = {
-    vampire: '🩸',
-    humain: '🧍‍♂️',
-    humaine: '🧍‍♀️',
-  };
-  return emblems[role.toLowerCase()] || '👤';
 };
 </script>
 
@@ -128,7 +133,8 @@ const getEmblemContent = (role) => {
     </button>
 
     <div class="book-wrapper" v-if="currentWork">
-      <div class="book-pages">
+      <!-- DESKTOP VERSION -->
+      <div class="book-pages desktop-only">
         <div class="book-page left-page">
           <div class="book-title-card">
             <h1 class="book-title animate-in">{{ currentWork.title }}</h1>
@@ -149,22 +155,21 @@ const getEmblemContent = (role) => {
             </div>
           </div>
           
-        
-          <div class="summary-section animate-in mobile-card" style="--delay: 0.4s">
+          <div class="summary-section animate-in" style="--delay: 0.4s">
             <h2>Résumé</h2>
             <p>{{ currentWork.summary }}</p>
           </div>
         </div>
 
         <div class="book-page right-page">
-          <div class="first-lines-section animate-in mobile-card" style="--delay: 0.6s">
+          <div class="first-lines-section animate-in" style="--delay: 0.6s">
             <h2>Les premières lignes</h2>
             <div class="first-lines-content">
               <p>{{ currentWork.firstLines }}</p>
             </div>
           </div>
           
-          <div v-if="currentWork.extract" class="extract-section animate-in mobile-card" style="--delay: 0.6s">
+          <div v-if="currentWork.extract" class="extract-section animate-in" style="--delay: 0.6s">
             <h2>Citation</h2>
             <div class="extract-content">
               <p>{{ currentWork.extract }}</p>
@@ -173,28 +178,84 @@ const getEmblemContent = (role) => {
         </div>
       </div>
 
-      <section v-if="currentWork.mainCharacters" class="characters-section">
-    <h2 class="section-title animate-in" style="--delay: 0.8s">Personnages principaux</h2>
-    <div class="characters-grid">
-      <div v-for="(character) in currentWork.mainCharacters" 
-           :key="character.id" 
-           class="character-card"
-           v-intersection-animate>
-        <div class="character-header">
-          <h3 class="character-name">{{ character.name }}</h3>
-          <span class="character-role">{{ character.role }}</span>
+      <!-- mobile -->
+      <div class="mobile-layout mobile-only">
+        <div class="book-title-card">
+          <h1 class="book-title animate-in">{{ currentWork.title }}</h1>
+
+          <div class="basic-info animate-in" style="--delay: 0.2s">
+            <div class="info-row">
+              <span class="label">Genre</span>
+              <span class="value">{{ currentWork.genre }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Statut</span>
+              <span class="value">{{ currentWork.status }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Longueur</span>
+              <span class="value">{{ currentWork.wordCount }}</span>
+            </div>
+          </div>
         </div>
-        <div class="character-desc">{{ character.shortDesc }}</div>
-        <button 
-          class="character-cta" 
-          @click="navigateToCharacter(character)"
-          :class="{ 'disabled': !character.online }">
-          <span>Fiche personnage</span>
-          <span class="arrow">→</span>
-        </button>
+      
+        <div class="collapsible-section mobile-card animate-in" style="--delay: 0.4s">
+          <div class="section-header" @click="toggleSummary">
+            <h2>Résumé</h2>
+            <div class="toggle-icon" :class="{ 'open': isSummaryOpen }">▶</div>
+          </div>
+          <div class="section-content" :class="{ 'open': isSummaryOpen }">
+            <p>{{ currentWork.summary }}</p>
+          </div>
+        </div>
+
+        <div class="collapsible-section mobile-card animate-in" style="--delay: 0.6s">
+          <div class="section-header" @click="toggleFirstLines">
+            <h2>Les premières lignes</h2>
+            <div class="toggle-icon" :class="{ 'open': isFirstLinesOpen }">▶</div>
+          </div>
+          <div class="section-content" :class="{ 'open': isFirstLinesOpen }">
+            <div class="first-lines-content">
+              <p>{{ currentWork.firstLines }}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div v-if="currentWork.extract" class="collapsible-section mobile-card animate-in" style="--delay: 0.8s">
+          <div class="section-header" @click="toggleExtract">
+            <h2>Citation</h2>
+            <div class="toggle-icon" :class="{ 'open': isExtractOpen }">▶</div>
+          </div>
+          <div class="section-content" :class="{ 'open': isExtractOpen }">
+            <div class="extract-content">
+              <p>{{ currentWork.extract }}</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+
+      <section v-if="currentWork.mainCharacters" class="characters-section">
+        <h2 class="section-title animate-in" style="--delay: 0.8s">Personnages principaux</h2>
+        <div class="characters-grid">
+          <div v-for="(character) in currentWork.mainCharacters" 
+               :key="character.id" 
+               class="character-card"
+               v-intersection-animate>
+            <div class="character-header">
+              <h3 class="character-name">{{ character.name }}</h3>
+              <span class="character-role">{{ character.role }}</span>
+            </div>
+            <div class="character-desc">{{ character.shortDesc }}</div>
+            <button 
+              class="character-cta" 
+              @click="navigateToCharacter(character)"
+              :class="{ 'disabled': !character.online }">
+              <span>Fiche personnage</span>
+              <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
     </div>
   </article>
 </template>
@@ -222,6 +283,10 @@ const getEmblemContent = (role) => {
   &:hover {
     transform: translateX(-3px);
   }
+  
+  @media (max-width: 768px) {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .book-wrapper {
@@ -236,8 +301,23 @@ const getEmblemContent = (role) => {
   }
 }
 
-.book-pages {
+.desktop-only {
   display: flex;
+  
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.mobile-only {
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+.book-pages {
   gap: 2rem;
   background: rgba($text-bg-color, 0.95);
   border-radius: 15px;
@@ -256,28 +336,11 @@ const getEmblemContent = (role) => {
     background: rgba($primary-color, 0.1);
     transform: translateX(-50%);
   }
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 1.5rem;
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
-    margin-bottom: 1.5rem;
-    
-    &::before {
-      display: none;
-    }
-  }
 }
 
 .book-page {
   flex: 1;
   padding: 1rem;
-  
-  @media (max-width: 768px) {
-    padding: 0;
-  }
 }
 
 .book-title {
@@ -290,50 +353,6 @@ const getEmblemContent = (role) => {
     font-size: 2rem;
     text-align: center;
     margin-bottom: 1.5rem;
-  }
-}
-
-.extract-content,
-.first-lines-content {
-  font-style: italic;
-  padding: 1rem;
-  background: rgba($primary-color, 0.05);
-  border-left: 3px solid $primary-color;
-  border-radius: 5px;
-  
-  @media (max-width: 768px) {
-    border-left: none;
-    border-top: 3px solid $primary-color;
-  }
-}
-
-@media (max-width: 768px) {
-  .book-title-card {
-    background: rgba($text-bg-color, 0.98);
-    border-radius: 15px;
-    padding: 1.5rem;
-    margin: 0 auto 1.5rem;
-    box-shadow: 0 10px 30px rgba($primary-color, 0.15);
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .mobile-card {
-    background: rgba($text-bg-color, 0.98);
-    border-radius: 15px;
-    padding: 1.5rem;
-    margin: 0 auto 1.5rem;
-    box-shadow: 0 10px 30px rgba($primary-color, 0.15);
-    width: 100%;
-    max-width: 100%; 
-    box-sizing: border-box; 
-    
-    h2 {
-      margin-top: 0;
-      text-align: center;
-      margin-bottom: 1.25rem;
-    }
   }
 }
 
@@ -358,6 +377,7 @@ const getEmblemContent = (role) => {
   
   @media (max-width: 768px) {
     width: 100%;
+    margin-bottom: 1rem;
     
     .info-row {
       padding: 0.25rem 0;
@@ -385,6 +405,102 @@ const getEmblemContent = (role) => {
 .extract-content p,
 .first-lines-content p {
   white-space: pre-line;
+}
+
+.extract-content,
+.first-lines-content {
+  font-style: italic;
+  padding: 1rem;
+  background: rgba($primary-color, 0.05);
+  border-left: 3px solid $primary-color;
+  border-radius: 5px;
+  
+  @media (max-width: 768px) {
+    border-left: none;
+    border-top: 3px solid $primary-color;
+  }
+}
+
+/* Styles Mobile */
+.mobile-layout {
+  width: 100%;
+}
+
+.book-title-card {
+  @media (max-width: 768px) {
+    background: rgba($text-bg-color, 0.98);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 30px rgba($primary-color, 0.15);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+.mobile-card {
+  background: rgba($text-bg-color, 0.98);
+  border-radius: 15px;
+  padding: 0;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 10px 30px rgba($primary-color, 0.15);
+  width: 100%;
+  max-width: 100%; 
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.collapsible-section {
+  overflow: hidden;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  cursor: pointer;
+  
+  &:hover .toggle-icon {
+    transform: translateX(5px);
+  }
+  
+  h2 {
+    margin: 0;
+    color: $primary-color;
+    font-size: 1.5rem;
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+.toggle-icon {
+  font-size: 1.3rem;
+  color: $primary-color;
+  transition: transform 0.3s ease;
+  
+  &.open {
+    transform: rotate(90deg) !important;
+  }
+}
+
+.section-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+  padding: 0 1.5rem;
+  
+  &.open {
+    max-height: 1000px;
+    padding: 1.5rem;
+    border-top: 1px solid rgba($primary-color, 0.1);
+  }
+  
+  p {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin: 0;
+  }
 }
 
 .characters-section {

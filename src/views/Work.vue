@@ -114,6 +114,8 @@ const goBack = () => {
   box-shadow: 0 10px 30px rgba($primary-color, 0.15);
   transition: all 0.3s ease;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 
   &:hover {
     transform: translateY(-5px);
@@ -139,6 +141,9 @@ const goBack = () => {
 
   .work-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 
     h2 {
       color: $primary-color;
@@ -146,10 +151,14 @@ const goBack = () => {
       margin-bottom: 0.5rem;
     }
 
-    p {
-      color: $text-color;
+    .description-container {
+      flex: 1;
       margin-bottom: 1rem;
-      text-align: justify;
+      
+      p {
+        color: $text-color;
+        text-align: justify;
+      }
     }
   }
 
@@ -170,7 +179,7 @@ const goBack = () => {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin-bottom: 1rem;
+  margin-top: auto;
 
   .tag {
     display: inline-block;
