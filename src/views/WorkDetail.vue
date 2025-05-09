@@ -14,8 +14,8 @@ const isExtractOpen = ref(false)
 const works = {
   work1: {
     title: "Sang Souvenir",
-    genre: "Urban Fantasy",
-    summary: "Dans une société où humains et vampires tentent vainement de vivre ensemble, ce n’est pas l’existence des créatures nocturnes qui pose problème à Dennis, un mortel qui partage son quotidien avec un de ces êtres surnaturels. Ce qui ennuie le jeune homme, ce sont les étranges migraines dont il souffre et qui attirent trop d’attention sur lui, menaçant le secret qu’il garde.\nAprès un séjour forcé à l’hôpital, Dennis se voit contraint de révéler la vérité à Thomas, son compagnon : il est le fils d’un scientifique influent, qui se livre à des expérimentations à l'éthique douteuse auxquelles il a servi de cobaye.\nSe confier à Thomas est une chose mais quand Andrea, un vampire important dans le paysage politique, met à son tour le doigt sur son secret, Dennis entre dans une panique folle à l’idée de dire au revoir à son quotidien anonyme.",
+    genre: "Science-fantasy",
+    summary: "Dennis est un humain bien décidé à se montrer discret malgré les étranges migraines qui l’accablent et compliquent son quotidien. Ni Thomas, son compagnon immortel, ni Eva, sa meilleure amie, ne doivent percer à jour le secret qu’il peine de plus en plus à cacher. \nPourtant, la nuit où un de ses maux de tête se transforme en évanouissement, Dennis se retrouve à l’hôpital et craque : il révèle à Thomas être le fils d’un couple de scientifiques éminents et avoir été utilisé comme cobaye pour des expériences sous le manteau. \nEva s’inquiète pour son ami et raconte les événements à Andrea, un vampire haut placé dans le paysage politique. Intéressé par le sujet, il approche Dennis. \nDennis, dans le collimateur d’un personnage si influent, n’a plus d’autres choix que d’affronter le passé qu’il fuit depuis longtemps. Cependant, les vérités qui éclatent sont bien plus lourdes que ce dont il se souvenait...",
     firstLines: "Cette nuit-là, moi qui n’avais pas versé la moindre larme depuis au moins mille ans, j’ai pleuré.\nPour vous, le 25 décembre 2105 a marqué la révélation de notre existence dans la violence et le sang. Mais pour moi, cette date a signé la véritable mort d’Horaha, âgé de quatre millénaires. Peut-être un peu plus, peut-être un peu moins ; à quoi bon compter ? Je pensais qu’il était éternel.",
     extract: "Les humains étaient pénibles parce que la peur guidait leurs actes. Les vampires étaient agaçants parce que leur sentiment de supériorité les incitait à agir comme des enfants pourris gâtés. Et, à lui, incombait la responsabilité de mettre de l’ordre dans ce merdier pour nourrir l’espoir d’une harmonie.",
     wordCount: "599 661 sec (99 559 mots)",
@@ -50,7 +50,7 @@ const works = {
         name: "Thomas",
         role: "Vampire",
         image: "placeholder",
-        shortDesc: "Idéaliste trop pacifique pour son propre bien, Thomas est l'exemple que ses congénères devraient suivre pour atteindre l'harmonie",
+        shortDesc: "Idéaliste et trop pacifique pour son propre bien, Thomas est l'exemple que ses congénères devraient suivre pour atteindre l'harmonie",
         online: true
       }
     ]
@@ -152,6 +152,13 @@ const vIntersectionAnimate = {
                 <span class="label">Longueur</span>
                 <span class="value">{{ currentWork.wordCount }}</span>
               </div>
+              <div class="info-row download-row">
+                <span class="value">
+                  <a href="/assets/doc/Sang Souvenir - Paola Soren - début.pdf" download class="download-link">
+                    → Découvrez le début du roman
+                  </a>
+                </span>
+              </div>
             </div>
           </div>
           
@@ -195,6 +202,13 @@ const vIntersectionAnimate = {
             <div class="info-row">
               <span class="label">Longueur</span>
               <span class="value">{{ currentWork.wordCount }}</span>
+            </div>
+            <div class="info-row download-row">
+              <span class="value">
+                <a href="/assets/doc/Sang Souvenir - Paola Soren - début.pdf" download class="download-link">
+                  → Découvrez le début du roman
+                </a>
+              </span>
             </div>
           </div>
         </div>
@@ -421,7 +435,6 @@ const vIntersectionAnimate = {
   }
 }
 
-/* Styles Mobile */
 .mobile-layout {
   width: 100%;
 }
@@ -632,6 +645,23 @@ const vIntersectionAnimate = {
   
   .arrow {
     transition: transform 0.3s ease;
+  }
+}
+
+.download-row {
+  margin-top: 0.5rem;
+  
+  .download-link {
+    color: $primary-color;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s ease;
+    
+    &:hover {
+      color: darken($primary-color, 15%);
+    }
   }
 }
 

@@ -31,7 +31,6 @@ const characters = {
     nationality: "Français",
     physicalDesc: {
       height: "1m59",
-      build: "Très pâle et très mince/maigre",
       hair: "Brun foncé",
       eyes: "Brun foncé",
       distinguishingFeatures: "Porte des lunettes à la monture épaisse\n Ne porte que des vêtements amples en dehors du travail"
@@ -80,7 +79,6 @@ const characters = {
     nationality: "Phénicien",
     physicalDesc: {
       height: "1m92",
-      build: "Élancé mais musclé à cause du travail manuel",
       hair: "Noir",
       eyes: "Vert foncé",
       distinguishingFeatures: "Apparence adolescente...\n...et allure négligée"
@@ -124,7 +122,6 @@ const characters = {
     nationality: "Franco-mexicaine",
     physicalDesc: {
       height: "1m73",
-      build: "Corpulence moyenne, habituée à porter des charges lourdes",
       hair: "Brun cuivré",
       eyes: "Vert clair",
       distinguishingFeatures: "Habille souvent son cou de bijoux ou de tissu pour cacher les marques de morsures"
@@ -178,7 +175,6 @@ const characters = {
     nationality: "Anglais",
     physicalDesc: {
       height: "1m80",
-      build: "Fine et élégante",
       hair: "Blond",
       eyes: "Bleu clair",
       distinguishingFeatures: "Ses cheveux sont le plus souvent attachés en queue de cheval ou tressés\net il n'utilise que des rubans pour le faire."
@@ -232,7 +228,6 @@ const navigateToCharacter = (character) => {
 
 const translations = {
   height: 'Taille',
-  build: 'Carrure',
   hair: 'Cheveux',
   eyes: 'Yeux',
   distinguishingFeatures: 'Autres',

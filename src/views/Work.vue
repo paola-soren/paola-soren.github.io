@@ -15,7 +15,7 @@ const works = [
     title: "Sang Souvenir",
     description: "À la suite de la Révolution sanglante au début du 22ème siècle, les humains et les vampires sont contraints de se cotoyer. La paix n'est pas à portée de main, et quand la science s'en mêle...",
     image: sangSouvenirImg,
-    tags: ["Roman", "Fantasy", "Adulte", "Vampires"],
+    tags: ["Roman", "Science-fantasy", "Adulte", "Vampires"],
     online: true,
   },
   {
