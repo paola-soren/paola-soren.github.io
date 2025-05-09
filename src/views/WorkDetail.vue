@@ -63,6 +63,7 @@ const works = {
         online: true,
       },
     ],
+    pdfLink: pdfUrl,
   },
   work3: {
     title: "Immersion",
@@ -175,12 +176,12 @@ const downloadPDF = () => {
                 <span class="value">{{ currentWork.wordCount }}</span>
               </div>
               <div class="info-row download-row">
-                <span class="value">
-                  <button @click="downloadPDF" class="download-link">
-                    → Découvrez le début du roman
-                  </button>
-                </span>
-              </div>
+              <span class="value">
+                <button @click="downloadPDF" class="download-link" v-if="currentWork.pdfLink">
+                  → Découvrez le début du roman
+                </button>
+              </span>
+            </div>
             </div>
           </div>
 
@@ -230,12 +231,12 @@ const downloadPDF = () => {
               <span class="value">{{ currentWork.wordCount }}</span>
             </div>
             <div class="info-row download-row">
-                <span class="value">
-                  <button @click="downloadPDF" class="download-link">
-                    → Découvrez le début du roman
-                  </button>
-                </span>
-              </div>
+            <span class="value">
+              <button @click="downloadPDF" class="download-link" v-if="currentWork.pdfLink">
+                → Découvrez le début du roman
+              </button>
+            </span>
+          </div>
           </div>
         </div>
 
