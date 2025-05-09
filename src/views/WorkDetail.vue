@@ -1,136 +1,158 @@
 <script setup>
-import { useRouter, useRoute } from 'vue-router'
-import { computed, ref, onMounted, nextTick } from 'vue'
-import ComingSoonPopup from '@/components/NoInfo.vue'
+import { useRouter, useRoute } from "vue-router";
+import { computed, ref, onMounted, nextTick } from "vue";
+import ComingSoonPopup from "@/components/NoInfo.vue";
+import pdfUrl from "@/assets/doc/Sang Souvenir-Paola Soren-début.pdf";
 
-const popup = ref(null)
-const router = useRouter()
-const route = useRoute()
 
-const isSummaryOpen = ref(false)
-const isFirstLinesOpen = ref(false)
-const isExtractOpen = ref(false)
+const popup = ref(null);
+const router = useRouter();
+const route = useRoute();
+
+const isSummaryOpen = ref(false);
+const isFirstLinesOpen = ref(false);
+const isExtractOpen = ref(false);
 
 const works = {
   work1: {
     title: "Sang Souvenir",
     genre: "Science-fantasy",
-    summary: "Dennis est un humain bien décidé à se montrer discret malgré les étranges migraines qui l’accablent et compliquent son quotidien. Ni Thomas, son compagnon immortel, ni Eva, sa meilleure amie, ne doivent percer à jour le secret qu’il peine de plus en plus à cacher. \nPourtant, la nuit où un de ses maux de tête se transforme en évanouissement, Dennis se retrouve à l’hôpital et craque : il révèle à Thomas être le fils d’un couple de scientifiques éminents et avoir été utilisé comme cobaye pour des expériences sous le manteau. \nEva s’inquiète pour son ami et raconte les événements à Andrea, un vampire haut placé dans le paysage politique. Intéressé par le sujet, il approche Dennis. \nDennis, dans le collimateur d’un personnage si influent, n’a plus d’autres choix que d’affronter le passé qu’il fuit depuis longtemps. Cependant, les vérités qui éclatent sont bien plus lourdes que ce dont il se souvenait...",
-    firstLines: "Cette nuit-là, moi qui n’avais pas versé la moindre larme depuis au moins mille ans, j’ai pleuré.\nPour vous, le 25 décembre 2105 a marqué la révélation de notre existence dans la violence et le sang. Mais pour moi, cette date a signé la véritable mort d’Horaha, âgé de quatre millénaires. Peut-être un peu plus, peut-être un peu moins ; à quoi bon compter ? Je pensais qu’il était éternel.",
-    extract: "Les humains étaient pénibles parce que la peur guidait leurs actes. Les vampires étaient agaçants parce que leur sentiment de supériorité les incitait à agir comme des enfants pourris gâtés. Et, à lui, incombait la responsabilité de mettre de l’ordre dans ce merdier pour nourrir l’espoir d’une harmonie.",
+    summary:
+      "Dennis est un humain bien décidé à se montrer discret malgré les étranges migraines qui l’accablent et compliquent son quotidien. Ni Thomas, son compagnon immortel, ni Eva, sa meilleure amie, ne doivent percer à jour le secret qu’il peine de plus en plus à cacher. \nPourtant, la nuit où un de ses maux de tête se transforme en évanouissement, Dennis se retrouve à l’hôpital et craque : il révèle à Thomas être le fils d’un couple de scientifiques éminents et avoir été utilisé comme cobaye pour des expériences sous le manteau. \nEva s’inquiète pour son ami et raconte les événements à Andrea, un vampire haut placé dans le paysage politique. Intéressé par le sujet, il approche Dennis. \nDennis, dans le collimateur d’un personnage si influent, n’a plus d’autres choix que d’affronter le passé qu’il fuit depuis longtemps. Cependant, les vérités qui éclatent sont bien plus lourdes que ce dont il se souvenait...",
+    firstLines:
+      "Cette nuit-là, moi qui n’avais pas versé la moindre larme depuis au moins mille ans, j’ai pleuré.\nPour vous, le 25 décembre 2105 a marqué la révélation de notre existence dans la violence et le sang. Mais pour moi, cette date a signé la véritable mort d’Horaha, âgé de quatre millénaires. Peut-être un peu plus, peut-être un peu moins ; à quoi bon compter ? Je pensais qu’il était éternel.",
+    extract:
+      "Les humains étaient pénibles parce que la peur guidait leurs actes. Les vampires étaient agaçants parce que leur sentiment de supériorité les incitait à agir comme des enfants pourris gâtés. Et, à lui, incombait la responsabilité de mettre de l’ordre dans ce merdier pour nourrir l’espoir d’une harmonie.",
     wordCount: "599 661 sec (99 559 mots)",
     status: "Terminé",
     mainCharacters: [
       {
-        id: 'dennis',
+        id: "dennis",
         name: "Dennis",
         role: "Humain",
         image: "placeholder",
-        shortDesc: "Réceptionniste dans une galerie d'expositions, Dennis est un jeune homme qui met tout en œuvre pour passer inaperçu",
-        online: true
+        shortDesc:
+          "Réceptionniste dans une galerie d'expositions, Dennis est un jeune homme qui met tout en œuvre pour passer inaperçu",
+        online: true,
       },
       {
-        id: 'andrea',
+        id: "andrea",
         name: "Andrea",
         role: "Vampire",
         image: "placeholder",
-        shortDesc: "Quand ennui et responsabilités se mêlent, ça donne Andrea\u00A0: une créature dont la fainéantise n'a d'égal que sa puissance",
-        online: true
+        shortDesc:
+          "Quand ennui et responsabilités se mêlent, ça donne Andrea\u00A0: une créature dont la fainéantise n'a d'égal que sa puissance",
+        online: true,
       },
       {
-        id: 'eva',
+        id: "eva",
         name: "Eva",
         role: "Humaine",
         image: "placeholder",
-        shortDesc: "Pourvue d'un optimisme à toute épreuve, Eva aime vivre au jour le jour. Elle aime aussi s'approcher de la mort et des sensations que cela lui apporte",
-        online: true
+        shortDesc:
+          "Pourvue d'un optimisme à toute épreuve, Eva aime vivre au jour le jour. Elle aime aussi s'approcher de la mort et des sensations que cela lui apporte",
+        online: true,
       },
       {
-        id: 'thomas',
+        id: "thomas",
         name: "Thomas",
         role: "Vampire",
         image: "placeholder",
-        shortDesc: "Idéaliste et trop pacifique pour son propre bien, Thomas est l'exemple que ses congénères devraient suivre pour atteindre l'harmonie",
-        online: true
-      }
-    ]
+        shortDesc:
+          "Idéaliste et trop pacifique pour son propre bien, Thomas est l'exemple que ses congénères devraient suivre pour atteindre l'harmonie",
+        online: true,
+      },
+    ],
   },
   work3: {
     title: "Immersion",
     genre: "Littérature blanche",
-    summary: "Anna est une jeune femme qui rêve de mettre des étoiles dans son quotidien, et qui va y parvenir d'une façon bien singulière.",
-    firstLines: "Si Anna vous racontait qu’elle avait enfin touché les étoiles, vous auriez tort de la croire.",
+    summary:
+      "Anna est une jeune femme qui rêve de mettre des étoiles dans son quotidien, et qui va y parvenir d'une façon bien singulière.",
+    firstLines:
+      "Si Anna vous racontait qu’elle avait enfin touché les étoiles, vous auriez tort de la croire.",
     wordCount: "10 566 sec (1761 mots)",
     status: "Terminé",
-  }
-}
+  },
+};
 
 const workId = Object.keys(works).find(
-  key => works[key].title.toLowerCase() === route.params.id
-)
+  (key) => works[key].title.toLowerCase() === route.params.id
+);
 
-const currentWork = computed(() => works[workId])
+const currentWork = computed(() => works[workId]);
 
 onMounted(async () => {
-  await nextTick()
+  await nextTick();
   window.scrollTo({
     top: 0,
-    behavior: 'instant'
-  })
-})
+    behavior: "instant",
+  });
+});
 
 const goBack = () => {
-  router.push('/textes')
-}
+  router.push("/textes");
+};
 
 const navigateToCharacter = (character) => {
   if (!character.online) {
-    popup.value.show()
-    return
+    popup.value.show();
+    return;
   }
 
-  router.push(`/personnages/${character.id}`)
-}
+  router.push(`/personnages/${character.id}`);
+};
 
 const toggleSummary = () => {
-  isSummaryOpen.value = !isSummaryOpen.value
-}
+  isSummaryOpen.value = !isSummaryOpen.value;
+};
 
 const toggleFirstLines = () => {
-  isFirstLinesOpen.value = !isFirstLinesOpen.value
-}
+  isFirstLinesOpen.value = !isFirstLinesOpen.value;
+};
 
 const toggleExtract = () => {
-  isExtractOpen.value = !isExtractOpen.value
-}
+  isExtractOpen.value = !isExtractOpen.value;
+};
 
 const vIntersectionAnimate = {
   mounted: (el) => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            el.classList.add('is-visible')
-          }, 100)
-          observer.unobserve(el)
-        }
-      })
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
-    })
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              el.classList.add("is-visible");
+            }, 100);
+            observer.unobserve(el);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      }
+    );
 
-    observer.observe(el)
-  }
-};
+    observer.observe(el);
+  },
+}
+
+const downloadPDF = () => {
+  const link = document.createElement('a')
+  link.href = pdfUrl;
+  link.download = 'Sang Souvenir - Paola Soren - début.pdf'
+  link.type = 'application/pdf'
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+}
 </script>
 
 <template>
   <ComingSoonPopup ref="popup" />
   <article class="work-detail">
-    <button class="back-button" @click="goBack">
-      ←
-    </button>
+    <button class="back-button" @click="goBack">←</button>
 
     <div class="book-wrapper" v-if="currentWork">
       <!-- DESKTOP VERSION -->
@@ -154,14 +176,14 @@ const vIntersectionAnimate = {
               </div>
               <div class="info-row download-row">
                 <span class="value">
-                  <a href="/assets/doc/Sang Souvenir - Paola Soren - début.pdf" download class="download-link">
+                  <button @click="downloadPDF" class="download-link">
                     → Découvrez le début du roman
-                  </a>
+                  </button>
                 </span>
               </div>
             </div>
           </div>
-          
+
           <div class="summary-section animate-in" style="--delay: 0.4s">
             <h2>Résumé</h2>
             <p>{{ currentWork.summary }}</p>
@@ -175,8 +197,12 @@ const vIntersectionAnimate = {
               <p>{{ currentWork.firstLines }}</p>
             </div>
           </div>
-          
-          <div v-if="currentWork.extract" class="extract-section animate-in" style="--delay: 0.6s">
+
+          <div
+            v-if="currentWork.extract"
+            class="extract-section animate-in"
+            style="--delay: 0.6s"
+          >
             <h2>Citation</h2>
             <div class="extract-content">
               <p>{{ currentWork.extract }}</p>
@@ -204,43 +230,53 @@ const vIntersectionAnimate = {
               <span class="value">{{ currentWork.wordCount }}</span>
             </div>
             <div class="info-row download-row">
-              <span class="value">
-                <a href="/assets/doc/Sang Souvenir - Paola Soren - début.pdf" download class="download-link">
-                  → Découvrez le début du roman
-                </a>
-              </span>
-            </div>
+                <span class="value">
+                  <button @click="downloadPDF" class="download-link">
+                    → Découvrez le début du roman
+                  </button>
+                </span>
+              </div>
           </div>
         </div>
-      
-        <div class="collapsible-section mobile-card animate-in" style="--delay: 0.4s">
+
+        <div
+          class="collapsible-section mobile-card animate-in"
+          style="--delay: 0.4s"
+        >
           <div class="section-header" @click="toggleSummary">
             <h2>Résumé</h2>
-            <div class="toggle-icon" :class="{ 'open': isSummaryOpen }">▶</div>
+            <div class="toggle-icon" :class="{ open: isSummaryOpen }">▶</div>
           </div>
-          <div class="section-content" :class="{ 'open': isSummaryOpen }">
+          <div class="section-content" :class="{ open: isSummaryOpen }">
             <p>{{ currentWork.summary }}</p>
           </div>
         </div>
 
-        <div class="collapsible-section mobile-card animate-in" style="--delay: 0.6s">
+        <div
+          class="collapsible-section mobile-card animate-in"
+          style="--delay: 0.6s"
+        >
           <div class="section-header" @click="toggleFirstLines">
             <h2>Les premières lignes</h2>
-            <div class="toggle-icon" :class="{ 'open': isFirstLinesOpen }">▶</div>
+            <div class="toggle-icon" :class="{ open: isFirstLinesOpen }">▶</div>
           </div>
-          <div class="section-content" :class="{ 'open': isFirstLinesOpen }">
+          <div class="section-content" :class="{ open: isFirstLinesOpen }">
             <div class="first-lines-content">
               <p>{{ currentWork.firstLines }}</p>
             </div>
           </div>
         </div>
-        
-        <div v-if="currentWork.extract" class="collapsible-section mobile-card animate-in" style="--delay: 0.8s">
+
+        <div
+          v-if="currentWork.extract"
+          class="collapsible-section mobile-card animate-in"
+          style="--delay: 0.8s"
+        >
           <div class="section-header" @click="toggleExtract">
             <h2>Citation</h2>
-            <div class="toggle-icon" :class="{ 'open': isExtractOpen }">▶</div>
+            <div class="toggle-icon" :class="{ open: isExtractOpen }">▶</div>
           </div>
-          <div class="section-content" :class="{ 'open': isExtractOpen }">
+          <div class="section-content" :class="{ open: isExtractOpen }">
             <div class="extract-content">
               <p>{{ currentWork.extract }}</p>
             </div>
@@ -249,21 +285,26 @@ const vIntersectionAnimate = {
       </div>
 
       <section v-if="currentWork.mainCharacters" class="characters-section">
-        <h2 class="section-title animate-in" style="--delay: 0.8s">Personnages principaux</h2>
+        <h2 class="section-title animate-in" style="--delay: 0.8s">
+          Personnages principaux
+        </h2>
         <div class="characters-grid">
-          <div v-for="(character) in currentWork.mainCharacters" 
-               :key="character.id" 
-               class="character-card"
-               v-intersection-animate>
+          <div
+            v-for="character in currentWork.mainCharacters"
+            :key="character.id"
+            class="character-card"
+            v-intersection-animate
+          >
             <div class="character-header">
               <h3 class="character-name">{{ character.name }}</h3>
               <span class="character-role">{{ character.role }}</span>
             </div>
             <div class="character-desc">{{ character.shortDesc }}</div>
-            <button 
-              class="character-cta" 
+            <button
+              class="character-cta"
               @click="navigateToCharacter(character)"
-              :class="{ 'disabled': !character.online }">
+              :class="{ disabled: !character.online }"
+            >
               <span>Fiche personnage</span>
               <span class="arrow">→</span>
             </button>
@@ -275,6 +316,28 @@ const vIntersectionAnimate = {
 </template>
 
 <style lang="scss" scoped>
+.download-link {
+  color: $primary-color;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.3s ease;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  
+  &:hover {
+    color: darken($primary-color, 15%);
+    
+    .download-icon {
+      transform: translateY(2px);
+    }
+  }
+}
+
 .work-detail {
   min-height: 100vh;
   padding: 2rem;
@@ -282,7 +345,7 @@ const vIntersectionAnimate = {
   overflow-x: hidden;
 
   @media (max-width: 768px) {
-    padding: 1rem; 
+    padding: 1rem;
   }
 }
 
@@ -293,11 +356,11 @@ const vIntersectionAnimate = {
   cursor: pointer;
   color: $primary-color;
   margin-bottom: 2rem;
-  
+
   &:hover {
     transform: translateX(-3px);
   }
-  
+
   @media (max-width: 768px) {
     margin-bottom: 1.5rem;
   }
@@ -307,7 +370,7 @@ const vIntersectionAnimate = {
   max-width: 1200px;
   margin: 2rem auto;
   padding-top: 2rem;
-  
+
   @media (max-width: 768px) {
     margin: 1rem auto;
     padding-top: 0;
@@ -317,7 +380,7 @@ const vIntersectionAnimate = {
 
 .desktop-only {
   display: flex;
-  
+
   @media (max-width: 768px) {
     display: none;
   }
@@ -325,7 +388,7 @@ const vIntersectionAnimate = {
 
 .mobile-only {
   display: none;
-  
+
   @media (max-width: 768px) {
     display: block;
   }
@@ -341,7 +404,7 @@ const vIntersectionAnimate = {
   margin-bottom: 4rem;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 50%;
     top: 0;
@@ -361,8 +424,8 @@ const vIntersectionAnimate = {
   font-size: 2.5rem;
   color: $primary-color;
   margin-bottom: 2rem;
-  font-family: 'Playfair Display', serif;
-  
+  font-family: "Playfair Display", serif;
+
   @media (max-width: 768px) {
     font-size: 2rem;
     text-align: center;
@@ -383,16 +446,16 @@ const vIntersectionAnimate = {
       color: $accent-color;
       font-weight: 500;
     }
-    
+
     .value {
       flex: 1;
     }
   }
-  
+
   @media (max-width: 768px) {
     width: 100%;
     margin-bottom: 1rem;
-    
+
     .info-row {
       padding: 0.25rem 0;
     }
@@ -406,7 +469,7 @@ const vIntersectionAnimate = {
     color: $primary-color;
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
   }
 
   p {
@@ -428,7 +491,7 @@ const vIntersectionAnimate = {
   background: rgba($primary-color, 0.05);
   border-left: 3px solid $primary-color;
   border-radius: 5px;
-  
+
   @media (max-width: 768px) {
     border-left: none;
     border-top: 3px solid $primary-color;
@@ -459,7 +522,7 @@ const vIntersectionAnimate = {
   margin: 0 auto 1.5rem;
   box-shadow: 0 10px 30px rgba($primary-color, 0.15);
   width: 100%;
-  max-width: 100%; 
+  max-width: 100%;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -474,16 +537,16 @@ const vIntersectionAnimate = {
   align-items: center;
   padding: 1.5rem;
   cursor: pointer;
-  
+
   &:hover .toggle-icon {
     transform: translateX(5px);
   }
-  
+
   h2 {
     margin: 0;
     color: $primary-color;
     font-size: 1.5rem;
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
   }
 }
 
@@ -491,7 +554,7 @@ const vIntersectionAnimate = {
   font-size: 1.3rem;
   color: $primary-color;
   transition: transform 0.3s ease;
-  
+
   &.open {
     transform: rotate(90deg) !important;
   }
@@ -502,13 +565,13 @@ const vIntersectionAnimate = {
   overflow: hidden;
   transition: max-height 0.5s ease, padding 0.5s ease;
   padding: 0 1.5rem;
-  
+
   &.open {
     max-height: 1000px;
     padding: 1.5rem;
     border-top: 1px solid rgba($primary-color, 0.1);
   }
-  
+
   p {
     line-height: 1.8;
     font-size: 1.1rem;
@@ -518,7 +581,7 @@ const vIntersectionAnimate = {
 
 .characters-section {
   margin-top: 2rem;
-  
+
   @media (max-width: 768px) {
     margin-top: 0;
   }
@@ -528,7 +591,7 @@ const vIntersectionAnimate = {
     font-size: 2rem;
     color: $primary-color;
     margin-bottom: 2rem;
-    
+
     @media (max-width: 768px) {
       font-size: 1.75rem;
       margin-bottom: 1.5rem;
@@ -542,7 +605,7 @@ const vIntersectionAnimate = {
   gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
-  
+
   @media (max-width: 768px) {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1rem;
@@ -560,7 +623,8 @@ const vIntersectionAnimate = {
   flex-direction: column;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.3s ease;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out,
+    box-shadow 0.3s ease;
   height: 100%;
   border: 1px solid rgba($primary-color, 0.1);
 
@@ -572,10 +636,10 @@ const vIntersectionAnimate = {
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba($primary-color, 0.2);
-    
+
     .character-cta {
       background: rgba($primary-color, 0.1);
-      
+
       .arrow {
         transform: translateX(5px);
       }
@@ -586,15 +650,20 @@ const vIntersectionAnimate = {
 .character-header {
   padding: 1.2rem 1.2rem 0.8rem;
   position: relative;
-  
+
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 1.2rem;
     right: 1.2rem;
     height: 1px;
-    background: linear-gradient(to right, transparent, rgba($primary-color, 0.3), transparent);
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba($primary-color, 0.3),
+      transparent
+    );
   }
 }
 
@@ -603,7 +672,7 @@ const vIntersectionAnimate = {
   font-weight: 600;
   color: $primary-color;
   margin: 0 0 0.5rem;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
 }
 
 .character-role {
@@ -637,12 +706,12 @@ const vIntersectionAnimate = {
   cursor: pointer;
   text-align: left;
   transition: background 0.3s ease;
-  
+
   &.disabled {
     opacity: 0.6;
     cursor: not-allowed;
   }
-  
+
   .arrow {
     transition: transform 0.3s ease;
   }
@@ -650,7 +719,7 @@ const vIntersectionAnimate = {
 
 .download-row {
   margin-top: 0.5rem;
-  
+
   .download-link {
     color: $primary-color;
     font-weight: 800;
@@ -658,7 +727,7 @@ const vIntersectionAnimate = {
     display: inline-flex;
     align-items: center;
     transition: color 0.3s ease;
-    
+
     &:hover {
       color: darken($primary-color, 15%);
     }
@@ -670,7 +739,7 @@ const vIntersectionAnimate = {
   transform: translateX(-20px);
   animation: slideIn 0.6s ease-out forwards;
   animation-delay: var(--delay, 0s);
-  
+
   @media (max-width: 768px) {
     transform: translateY(-20px);
     animation-name: fadeIn;
