@@ -74,6 +74,7 @@ const works = {
       "Si Anna vous racontait qu’elle avait enfin touché les étoiles, vous auriez tort de la croire.",
     wordCount: "10 566 sec (1761 mots)",
     status: "Terminé",
+    link: "https://www.kobo.com/fr/fr/ebook/etoiles-5",
   },
 };
 
@@ -176,12 +177,19 @@ const downloadPDF = () => {
                 <span class="value">{{ currentWork.wordCount }}</span>
               </div>
               <div class="info-row download-row">
-              <span class="value">
-                <button @click="downloadPDF" class="download-link" v-if="currentWork.pdfLink">
-                  → Découvrez le début du roman
-                </button>
-              </span>
-            </div>
+                <span class="value">
+                  <button @click="downloadPDF" class="download-link" v-if="currentWork.pdfLink">
+                    → Découvrez le début du roman
+                  </button>
+                </span>
+              </div>
+              <div class="info-row" v-if="currentWork.link">
+                <span class="value">
+                  <a :href="currentWork.link">
+                    → Lire sur Kobo
+                  </a>              
+                </span>
+              </div>
             </div>
           </div>
 
@@ -231,12 +239,19 @@ const downloadPDF = () => {
               <span class="value">{{ currentWork.wordCount }}</span>
             </div>
             <div class="info-row download-row">
-            <span class="value">
-              <button @click="downloadPDF" class="download-link" v-if="currentWork.pdfLink">
-                → Découvrez le début du roman
-              </button>
-            </span>
-          </div>
+              <span class="value">
+                <button @click="downloadPDF" class="download-link" v-if="currentWork.pdfLink">
+                  → Découvrez le début du roman
+                </button>
+              </span>
+            </div>
+            <div class="info-row" v-if="currentWork.link">
+                <span class="value">
+                  <a :href="currentWork.link">
+                    → Lire sur Kobo
+                  </a>              
+                </span>
+              </div>
           </div>
         </div>
 
@@ -317,7 +332,8 @@ const downloadPDF = () => {
 </template>
 
 <style lang="scss" scoped>
-.download-link {
+.download-link,
+a {
   color: $primary-color;
   font-weight: 500;
   text-decoration: none;
