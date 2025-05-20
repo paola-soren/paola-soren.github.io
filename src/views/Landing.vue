@@ -7,7 +7,7 @@ import backgroundImage from '@/assets/img/johannes-plenio-hvrpOmuMrAI-unsplash.j
     <div class="text-content">
       <div class="content-wrapper">
         <h1>Paola Soren</h1>
-        <p>Bienvenue dans mon univers de fantasy, et partez à la découverte de mes textes et des personnages qui les habitent.</p>
+        <p>Autrice de l'imaginaire</p>
       </div>
     </div>
     <div class="image-content" :style="{ backgroundImage: `url(${backgroundImage})` }"></div>
@@ -52,6 +52,7 @@ import backgroundImage from '@/assets/img/johannes-plenio-hvrpOmuMrAI-unsplash.j
       p {
         font-size: 1.2rem;
         margin: 0;
+        text-align: center;
       }
     }
 

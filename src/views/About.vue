@@ -22,7 +22,8 @@ const navigateToWork = () => {
           <h2>Qui suis-je ?</h2>
           <p class="preview-text">Petite belge perdue dans des univers un peu trop sombres&nbsp;~</p>
           <div class="full-bio">
-            <p>Fana de chats, d'Asie (en particulier la culture japonaise) et de manger&nbsp;! Mais quand je n'admire pas le prédateur qui vit chez moi en grignotant devant un anime, j'écris. Mes genres de prédilection sont l'urban et la low fantasy car j'aime me reposer sur une base de réalité, pour mieux la tordre comme je l'entends ensuite.</p>
+            <p>Fana de chats, du Japon et de manger&nbsp;! Mais quand je n'admire pas le prédateur qui vit chez moi en grignotant devant un anime, j'écris. J'aime me reposer sur une base de réalité, pour mieux la tordre comme je l'entends ensuite.</p>
+            <p>Mes goûts en lecture sont éclectiques mais j'affectionne particulièrement les récits qui explorent la profondeur de la psychologie humaine. D'ailleurs, je rêverais d'un afternoon tea avec Oscar Wilde !</p>
           </div>
         </div>
       </div>
@@ -33,7 +34,7 @@ const navigateToWork = () => {
         </div>
         <div class="content-wrapper">
           <h2>Ce que j'écris</h2>
-          <p class="preview-text">Découvre mes projets ici&nbsp;!</p>
+          <p class="preview-text">Découvrez mes projets ici&nbsp;!</p>
         </div>
       </div>
     </div>
@@ -125,7 +126,7 @@ const navigateToWork = () => {
     .full-bio {
       max-height: 0;
       opacity: 0;
-      overflow: hidden;
+      //overflow: hidden;
       transition: all 1s ease;
       font-size: 1.1rem;
       line-height: 1.6;
@@ -262,23 +263,22 @@ const navigateToWork = () => {
   }
 
   .about-me, .about-work {
-    flex-direction: row;
-    padding: 2.5rem;
+    flex-direction: column; 
+    padding: 2rem;
     gap: 1.5rem;
     
     .floating-image {
-      width: 125px;
-      height: 125px;
-      margin-bottom: 0;
+      width: 100px;
+      height: 100px;
+      margin-bottom: 1rem; 
       flex-shrink: 0;
     }
 
     .content-wrapper {
-      width: calc(100% - 100px - 1.5rem);
+      width: 100%; 
       padding: 0;
-      text-align: left;
-      padding: 1rem;
-
+      text-align: center;
+      
       h2 {
         font-size: 1.75rem;
         margin-bottom: 0.5rem;
@@ -299,7 +299,7 @@ const navigateToWork = () => {
   .about-work {
     .content-wrapper {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column; 
       align-items: center;
       gap: 0.25rem;
 
@@ -309,7 +309,6 @@ const navigateToWork = () => {
 
       .preview-text {
         margin: 0;
-        display: inline;
       }
     }
   }

@@ -43,10 +43,10 @@ const characters = {
         "Parle peu, s'exprime principalement avec des phrases courtes"
       ],
       quirks: "Adore les patisseries",
-      fears: "Être intérrogé sur son passé",
+      fears: "Être intérrogé sur son enfance",
       dreams: "Vivre tranquille le plus longtemps possible"
     },
-    background: "Dennis n'a pas de famille, du moins c'est ce qu'il vous dira. Même ses proches en savent peu sur sa vie passée\u00A0: où a-t-il grandi\u00A0? A-t-il fait des études\u00A0? Pourquoi souffre-t-il de migraines étranges et, surtout, pourquoi refuse-t-il de consulter le corps médical à ce sujet\u00A0? Ce sont tant de questions auxquelles il s'entêtera de ne pas répondre jusqu'à ne plus avoir le choix.",
+    background: "Un passé caché pour un présent fragile\n\nDennis n'a pas de famille, du moins c'est ce qu'il vous dira. Même ses proches en savent peu sur sa vie passée\u00A0: où a-t-il grandi\u00A0? A-t-il fait des études\u00A0? Pourquoi souffre-t-il de migraines étranges et, surtout, pourquoi refuse-t-il de consulter le corps médical à ce sujet\u00A0? Ce sont tant de questions auxquelles il s'entêtera de ne pas répondre jusqu'à ne plus avoir le choix.\n Pourtant, derrière son masque solitaire se cache un homme qui meurt d'envie de créer des connexions. Pour les rares personnes parvenues à percer sa carapace, il est prêt à lutter contre son instinct d'autoprotection, au risque de se rendre trop vulnérable.\n Même s'il n'y parvient pas toujours...",
     // abilities: [
     //   {
     //     name: "nom de la magie",
@@ -94,7 +94,7 @@ const characters = {
       fears: "Rien",
       dreams: "Retourner à sa vie d'avant, exempte de responsabilités"
     },
-    background: "En trois millénaires, on est témoin d'un nombre incaculable de choses, y compris des atrocités et de la stupidité des autres. Andrea l'a bien compris et a vite décidé de vivre son existence de vampire le plus passivement possible. Et sans la mort de son mentor, il aurait continué à suivre ce principe jusqu'à la fin de ses jours.",
+    background: "Quand l'immortalité n'est pas un cadeau\n\nEn trois millénaires, on est témoin d'un nombre incaculable de choses, y compris des atrocités et de la stupidité des autres. Andrea l'a bien compris et a vite décidé de vivre son existence de vampire le plus passivement possible. Et sans la mort de son mentor, il aurait continué à suivre ce principe jusqu'à la fin de ses jours.\n Créature millénaire que tout ennuie, son irritabilité et son impatience reflètent son désir profond de retourner à sa vie d'avant. Aujourd'hui, prisonnier d'une hiérarchie et de sa loyauté, il trouve refuge dans la provocation et le conflit avec l'autorité.",
     // abilities: [
     //   {
     //     name: "nom de la magie",
@@ -137,7 +137,7 @@ const characters = {
       fears: "Ne pas pouvoir aider les autres",
       dreams: "Profiter de l'instant présent en dépit des dangers"
     },
-    background: "Eva est fascinée par les vampires. Elle s'était d'abord destinée à des études de biologie dans l'espoir de pouvoir les étudier et les comprendre mieux, mais le destin en a voulu autrement. Après avoir échappé à la mort, elle a décidé de rester aux commandes du bar où elle travaille, lieu capable de faire ressortir le meilleur mais surtout le pire de tout un chacun.",
+    background: "Pas de vie sans la mort\n\nEva est fascinée par les vampires. Elle s'était d'abord destinée à des études de biologie dans l'espoir de pouvoir les étudier et les comprendre mieux, mais le destin en a voulu autrement. Après avoir échappé à la mort, elle a décidé de rester aux commandes du bar où elle travaille, lieu capable de faire ressortir le meilleur mais surtout le pire de tout un chacun.\nSa vie est guidée par un étrange paradoxe: rien n'est plus important que de vivre sa vie au jour le jour, mais la sensation d'être au bord du prépice est celle qui la rend la plus vivante.",
     // abilities: [
     //   {
     //     name: "nom de la magie",
@@ -190,7 +190,7 @@ const characters = {
       fears: "Renoncer à l'amour",
       dreams: "Pouvoir être témoin d'une société où règne l'harmonie"
     },
-    background: "Né dans un Londres homophobe, Thomas a renoncé à sa première vie dans l'espoir que la suivante lui offre ce dont il manquait. Il est resté dans l'ombre durant des siècles, jusqu'à ce que la Révolution sanglante ne le projette de force dans une nouvelle lumière et lui donne l'occasion de regoûter à certains plaisirs de la vie.",
+    background: "Un immortel au coeur trop tendre\n\nNé dans un Londres homophobe, Thomas a renoncé à sa première vie dans l'espoir que la suivante lui offre ce dont il manquait. Il est resté dans l'ombre durant des siècles, jusqu'à ce que la Révolution sanglante ne le projette de force dans une nouvelle lumière et lui donne l'occasion de regoûter à certains plaisirs de la vie.\nPacifiste convaincu et romantique dans l'âme, sa nature altruiste le rend vulnérable à la manipulation.",
     // abilities: [
     //   {
     //     name: "nom de la magie",
@@ -619,6 +619,11 @@ const getRelationSymbol = (type) => {
       max-height: 2000px;
       opacity: 1;
     }
+  }
+
+  .character-wrapper,
+  .character-sheet {
+    padding: 1rem;
   }
 
   .quotes-list {
